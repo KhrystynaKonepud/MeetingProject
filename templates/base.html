@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Онлайн-зустрічі{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Стилі -->
+    <style>
+        :root {
+            --light-blue: #ceeefd;
+            --primary: #045174;
+            --dark: #1b262c;
+            --light: #f9f9f9;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background-color: var(--light-blue);
+            color: var(--dark);
+        }
+
+        header {
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 30px;
+            min-height: 80vh;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            text-align: center;
+            padding: 15px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+    </style>
+
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <h1>Онлайн-зустрічі</h1>
+        <nav>
+            <a href="{% url 'home' %}">Головна</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        &copy; {{ year|default:"2025" }} Онлайн-зустрічі. Всі права захищено.
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
