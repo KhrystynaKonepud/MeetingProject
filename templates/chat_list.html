@@ -1,10 +1,31 @@
 {% extends 'base.html' %}
+
+{% block title %}Чати{% endblock %}
+
 {% block content %}
 <h2>Мої чати</h2>
-<a href="{% url 'create_chat' %}" class="btn btn-primary">Створити чат</a>
-<ul>
+
+<!-- Кнопка переходу на створення чату -->
+<div style="margin-bottom: 30px;">
+    <a href="{% url 'create_chat' %}" 
+       style="background-color: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
+        ➕ Створити новий чат
+    </a>
+</div>
+
+<!-- Список чатів як картки -->
+<div style="display: flex; flex-direction: column; gap: 15px;">
     {% for room in rooms %}
-    <li><a href="{% url 'chat_room' room.id %}">{{ room.name }}</a></li>
+    <div style="background: white; padding: 15px 20px; border-radius: 10px; box-shadow: 0 0 5px rgba(0,0,0,0.1);">
+        <div style="font-size: 18px; font-weight: bold;">{{ room.name }}</div>
+        <div style="margin-top: 10px;">
+            <a href="{% url 'chat_room' room.id %}" style="color: var(--primary); text-decoration: none; font-weight: bold;">
+                Відкрити чат
+            </a>
+        </div>
+    </div>
+    {% empty %}
+    <div style="font-style: italic;">У вас ще немає чатів.</div>
     {% endfor %}
-</ul>
+</div>
 {% endblock %}

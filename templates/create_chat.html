@@ -1,9 +1,20 @@
 {% extends 'base.html' %}
+
+{% block title %}Створити чат{% endblock %}
+
 {% block content %}
-<h2>Створити чат</h2>
-<form method="post">
+    
+<h2>Створити новий чат</h2>
+
+<form method="post" style="max-width: 600px; margin-bottom: 40px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Створити</button>
+    <button type="submit" style="background-color: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+        Створити
+    </button>
+    <button type="button" onclick="window.location.href='{% url 'chat_list' %}'"
+    style="background-color: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+    Назад
+</button>
 </form>
 {% endblock %}

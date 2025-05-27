@@ -1,22 +1,50 @@
 {% extends 'base.html' %}
+
+{% block title %}Чат: {{ room.name }}{% endblock %}
+
 {% block content %}
+
+
 <h2>Чат: {{ room.name }}</h2>
 
-<div style="border:1px solid #ccc; padding:10px; height:300px; overflow-y:auto;">
-    {% for message in messages %}
-        <p>
-            <strong>{{ message.sender.username }}</strong>: {{ message.text }}
-            {% if message.file %}
-                <a href="{{ message.file.url }}" download>[файл]</a>
-            {% endif %}
-            <br><small>{{ message.timestamp }}</small>
-        </p>
-    {% endfor %}
-</div>
 
-<form method="post" enctype="multipart/form-data" style="margin-top:20px;">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Надіслати</button>
-</form>
+<div style="max-width: 800px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-bottom: 30px;">
+
+
+    <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+        {% for message in messages %}
+            <div style="margin-bottom: 15px;">
+                <strong style="color: var(--primary);">{{ message.sender.username }}:</strong> {{ message.text }}
+                {% if message.file %}
+                    <div><a href="{{ message.file.url }}" download style="color: var(--primary); text-decoration: none;">📎 Завантажити файл</a></div>
+                {% endif %}
+                <div style="font-size: 12px; color: #666;">{{ message.timestamp }}</div>
+            </div>
+        {% empty %}
+            <div style="font-style: italic;">Повідомлень ще немає.</div>
+        {% endfor %}
+    </div>
+
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div style="margin-bottom: 10px;">
+            {{ form.text.label_tag }}<br>
+            {{ form.text }}
+        </div>
+        <div style="margin-bottom: 20px;">
+            {{ form.file.label_tag }}<br>
+            {{ form.file }}
+        </div>
+        <button type="submit" style="background-color: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+            Надіслати
+        </button>
+        <button type="button" onclick="window.location.href='{% url 'chat_list' %}'"
+    style="background-color: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+    Назад
+</button>
+
+
+    </form>
+</div>
 {% endblock %}
