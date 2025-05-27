@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Редагувати зустріч{% endblock %}
+
+{% block content %}
+<h2>Редагувати зустріч: {{ meeting.title }}</h2>
+<form method="post" style="max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" style="background-color: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Зберегти</button>
+</form>
+<div style="text-align: center; margin-top: 20px;">
+    <a href="{% url 'meeting' %}" style="color: var(--primary); text-decoration: none; font-weight: bold;">Повернутися до списку зустрічей</a>
+</div>
+{% endblock %}

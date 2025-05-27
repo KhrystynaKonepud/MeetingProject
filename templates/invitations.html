@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Запрошення{% endblock %}
+
+{% block content %}
+<h2>Зустрічі, на які вас запросили</h2>
+<div style="display: flex; flex-direction: column; gap: 15px;">
+    {% for meeting in invited_meetings %}
+        <div style="background: white; padding: 15px 20px; border-radius: 10px; box-shadow: 0 0 5px rgba(0,0,0,0.1);">
+            <div style="font-size: 18px; font-weight: bold;">{{ meeting.title }}</div>
+            <div style="margin-top: 5px;">{{ meeting.start_time }} — тривалість: {{ meeting.duration }} хв</div>
+            <div style="margin-top: 10px;">
+                <a href="{{ meeting.meeting_url }}" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: bold;">Приєднатись до дзвінка</a>
+            </div>
+        </div>
+    {% empty %}
+        <div style="font-style: italic;">Немає запрошень.</div>
+    {% endfor %}
+</div>
+{% endblock %}
