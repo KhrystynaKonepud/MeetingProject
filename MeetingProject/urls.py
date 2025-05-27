@@ -18,6 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from Project.views.home_view import home_view
 from Project.views.view_meeting import edit_meeting, meetings_view, invitations_view
+from Project.views.chat_view import chat_list, chat_room, create_chat
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +34,10 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('invitations/', invitations_view, name='invitations'),
 
+
+    path('chats/', chat_list, name='chat_list'),
+    path('chats/<int:room_id>/', chat_room, name='chat_room'),
+    path('chats/create/', create_chat, name='create_chat'),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

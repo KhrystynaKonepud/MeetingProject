@@ -74,6 +74,7 @@
         <h1>Онлайн-зустрічі</h1>
         <nav>
             <a href="{% url 'home' %}">Головна</a>
+            <a href="{% url 'chat_list' %}">Чати</a>
             <a href="{% url 'meeting' %}">Відеодзвінки</a>
             <a href="{% url 'invitations' %}">Запрошення</a>
             {% if user.is_authenticated %}
@@ -100,3 +101,6 @@
     {% block extra_js %}{% endblock %}
 </body>
 </html>
+
+
+

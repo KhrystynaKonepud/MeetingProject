@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Мої чати</h2>
+<a href="{% url 'create_chat' %}" class="btn btn-primary">Створити чат</a>
+<ul>
+    {% for room in rooms %}
+    <li><a href="{% url 'chat_room' room.id %}">{{ room.name }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
